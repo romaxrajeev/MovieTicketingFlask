@@ -1,0 +1,191 @@
+<html>
+<head>
+<title>Booking Website - Thiruvananthapuram</title>
+<link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: orange;
+}
+</style>
+<style>
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+  max-width: 300px;
+  margin: auto;
+  background-color: #990B14;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: #fff;
+  background-color: #B00604;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 21px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  background-color: #fff;
+  color:#000;
+}
+
+body {
+  background-image: url("{{ url_for('static',filename='images/6361.jpg')}}");
+  background-repeat: no-repeat;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+</head>
+<body>
+  <font face="Montserrat" color="#ffffff">
+    <div id="main">
+    <div class="col-lg-1">
+    <button class="btn" onclick="openNav()" style="display: block; background-color: #ffffff; color:#000;">&#9776;</button>
+  </div>
+  <div class="col-lg-11"></div>
+  <br>
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/">Home</a>
+  <a href="#">Account</a>
+  <a href="#">Beverages</a>
+  <a href="#">Settings</a>
+  {% if current_user.is_authenticated %}
+  <a href="{{ url_for('logout') }}">Logout</a>
+  {% else %}
+  <a href="{{ url_for('login') }}">Login</a>
+  {% endif %}
+</div>
+    <br>
+
+  {% for movie in malayalam_movie_list %}
+      <div class="col-lg-3">
+      <div class="card">
+      <img src="/static/images/{{ movie.imgname }}.jpg" alt="GullyBoy" style="width:250px; height:300px;">
+      <p>
+      <h2><font face="Montserrat">{{ movie.title }}</font></h2>
+      </p>
+      <p style="padding: 10px 10px 10px 10px;">
+      <font face="Montserrat">
+      {{ movie.des }} 
+      <p><b>Director:</b> {{ movie. dir }}</p>
+      <p><b>Cast:</b> {{ movie.cast }}</p>
+      </font>
+      </p>
+      <br>
+      <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ movie.per }}"
+    aria-valuemin="0" aria-valuemax="100" style="width:{{ movie.per }}%">
+      IMDb {{movie.imdb}}/10
+      </div>
+      </div>
+      <br>
+      <p><a href="/plan/{{ movie.title }}/{{ region }}"><button>BOOK TICKETS</button></a></p>
+      </div></div>  
+    
+
+  {% endfor %}
+
+<!--Scripts-->
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+<script src="/js/bootstrap.min.js"></script>
+</font>
+</body>
+</html>

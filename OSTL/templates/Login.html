@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Booking Website</title>
+<link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+  padding: 20px 20px 20px 20px;
+  background-color: #990B14;
+}
+body{
+	background-image: url("/static/images/6361.jpg");
+	background-repeat: repeat;
+	background-position: center;
+}
+</style>
+</head>
+<body>
+	<font face="Montserrat" color="#fff">
+		<div class="col-lg-12"><br></div>
+		<div class="col-lg-12"><br></div>
+		<div class="col-lg-12"><br></div>
+		<div class="col-lg-12"><br></div>
+		<div class="col-lg-12"><br></div>
+		<div class="col-lg-12"><br></div>
+	<div class="col-lg-3"></div>
+	<div class="col-lg-6">
+		<div class="card">
+	<div class="content-section">
+<form method="POST" action="">
+	{{ form.hidden_tag()}}
+	<fieldset class="form-group">
+	<legend class="border-bottom mb-4"><font color="#fff">Login to catch up with the latest movies</legend></font>
+	
+	<div class="form-group">
+	{{ form.email.label(class="form-control-label")}}
+	{% if form.email.errors %}
+	{{ form.email(class="form-control form-control-md is-invalid")}}
+	<div class="invalid-feedback">
+		<font color="yellow">
+		{% for error in form.email.errors %}
+			<span>{{ error }}</span>
+		{% endfor %}
+		</font>
+	</div>
+	{% else %}
+	{{ form.email(class="form-control form-control-md")}}
+	{% endif %}
+	</div>
+
+	<div class="form-group">
+	{{ form.password.label(class="form-control-label")}}
+	{% if form.password.errors %}
+	{{ form.password(class="form-control form-control-md is-invalid")}}
+	<div class="invalid-feedback">
+		<font color="yellow">
+		{% for error in form.password.errors %}
+			<span>{{ error }}</span>
+		{% endfor %}
+		</font>
+	</div>
+	{% else %}
+	{{ form.password(class="form-control form-control-md")}}
+	{% endif %}
+	</div>
+
+	</fieldset>
+	<div class="form-group">
+	{{ form.login_btn(class="btn btn-success")}}
+	</div>
+	<br>
+	<a href="#">Forgot Password?</a>
+
+</form>
+<br>
+	</div>
+	<div class="border-top pt-3">
+		Register? <a class="ml-2" href="{{ url_for('register')}}">Sign Up</a>
+	</div>
+	</div>
+	</div>
+<div class="col-lg-3"></div>
+</font>
+</body>
+</html>
